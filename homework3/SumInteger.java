@@ -4,15 +4,16 @@ import java.util.Scanner;
 
 public class SumInteger {
     public static void main(String[] args) {
-        System.out.print("Введите целое число: ");
-        int i =nextInteger();
-        System.out.print("Введите второе целое число: ");
-        int j =nextInteger();
-        System.out.println("Сумма введенных вами чисел " + (i+j));
-    }
-    public static int nextInteger(){
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNextInt()){
+        System.out.print("Введите целое число: ");
+        int i = nextInteger(sc);
+        System.out.print("Введите второе целое число: ");
+        int j = nextInteger(sc);
+        System.out.println("Сумма введенных вами чисел " + (i + j));
+    }
+
+    public static int nextInteger(Scanner sc) {
+        if (sc.hasNextInt()) {
             return sc.nextInt();
         } else {
             System.out.println("Вы ввели не целое число");
