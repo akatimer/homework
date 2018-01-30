@@ -28,6 +28,12 @@ public class Person {
         System.out.println("Такой то " + name + " говорит");
     }
 
+    @Override
+
+    public String toString() {
+        return String.format("Person{  + fullName='%s', age='%d'}" );
+    }
+
     public static void main(String[] args) {
         Person firstPerson = new Person();
         Person secondPerson = new Person("Вася", 33);

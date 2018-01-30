@@ -108,7 +108,7 @@ public class Reader {
             newBook[i] = recivedBooks[i];
         }
         for (int i = countBook; i < countBook + books.length; i++) {
-            System.out.println("Студент взял " + books[n]);
+            System.out.println("Студент " + fio + " взял " + books[n]);
             newBook[i] = books[n];
             n++;
         }
@@ -118,39 +118,72 @@ public class Reader {
     }
 
     public void takeBook(String... titles) {
-        System.out.println("Студент взял книг: " + titles.length);
+        System.out.println("Студент " + fio + " взял книг: " + titles.length);
         for (String t : titles) {
             System.out.print(t + " ");
         }
     }
 
+    public void takeBook(int i) {
+        System.out.println("Студент" + fio + " взял " + i + " книг");
+    }
+
     public void returnBook(Scanner sc) {
         Book[] studentsBook = getRecivedBooks();
-        int n=1;
-        for (Book i: studentsBook){
-            System.out.println(n+"." + i);
+        System.out.println("Книги у студента: ");
+        int n = 1;
+        for (Book i : studentsBook) {
+            System.out.println(n + "." + i);
             n++;
         }
-        int k=0;
-        while (k == 0){
+        int k = 0;
+        while (k == 0) {
             System.out.println("Введите номер книги которую хотите вернуть: ");
             if (sc.hasNextInt()) {
-               int i = sc.nextInt();
-               studentsBook[i]=null;
+                int i = sc.nextInt();
+                studentsBook[i - 1] = null;
+                System.out.println("Вернуть еще одну 1, прекратить возврат 0");
+                int j = sc.nextInt();
+                if (j == 0) {
+                    k = 1;
+                } else {
+                    k = 0;
+                }
             } else {
                 System.out.println("Ошибка ввода");
                 System.exit(2);
             }
         }
-        System.out.print("Введите количество книг которые вы хотите вернуть: ");
-
-        for (int i=0; i< k; i++){
-
-        }
-
+        recivedBooks = delNulls(studentsBook);
     }
 
+    public void returnBook(String... str) {
+        for (String s : str) {
+            int i = 1;
+            System.out.println(i + ". Cтудент " + fio + "вернул книгу " + s);
+            i++;
+        }
+    }
 
+    public void returnBook(int i) {
+        System.out.println("Cтудент " + fio + " вернул " + i + " книг");
+    }
 
-
+    public static Book[] delNulls(Book[] books) {
+        int countNull = 0;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) {
+                countNull++;
+            }
+        }
+        Book[] newBooks = new Book[books.length - countNull];
+        int j = 0;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null) {
+                newBooks[j] = books[i];
+                j++;
+            }
+        }
+        return newBooks;
+    }
 }
